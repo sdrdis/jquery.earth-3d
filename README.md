@@ -22,9 +22,9 @@ Here are the main functionality provided so far:
 
 Licence
 -------
-jquery.earth3d.js is, as the [sphere.js](https://github.com/SamHasler/sphere) plugin, under  MIT licence.
+jquery.earth3d.js is, as the [sphere.js](https://github.com/SamHasler/sphere) plugin, under [MIT licence](http://sdrdis.github.com/jquery.earth-3d/MIT-LICENSE.txt).
 
 Credits
 -------
 * Of course, [sphere.js](https://github.com/SamHasler/sphere) plugin
-* Roger Cook and Don Shanosky for the plain icon, on thenounproject.
+* Roger Cook and Don Shanosky for the plain icon, on [thenounproject](http://thenounproject.com/noun/airplane/#icon-No75).
