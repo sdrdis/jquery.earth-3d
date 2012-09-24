@@ -1,4 +1,4 @@
-Copyright 2012 Sébastien Drouyer
+Copyright 2012 Sebastien Drouyer
 https://github.com/SamHasler/sphere
 
 Permission is hereby granted, free of charge, to any person obtaining
