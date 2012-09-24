@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>jquery.earth-3d.js plugin - draw a 3d spinning earth on canvas</title>
+    <link rel="stylesheet" href="css/demo.css">
+    <script type="text/javascript" src="plugins/sphere/requestanimationframe.polyfill.js"></script>
+    <script type="text/javascript" src="plugins/jquery/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="plugins/jquery.ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="sphere-hacked.js"></script>
+    <script type="text/javascript" src="jquery.earth-3d.js"></script>
+    <script type="text/javascript" src="demo.js"></script>
+  </head>
+  <body>
+    <h1>jquery.earth-3d.js (v0.1)</h1>
+    <div class="subtitle">Draw a beautiful 3d spinning earth on canvas</div>
+    <div id="demo">
+      <div id="description">
+        <h2>Description</h2>
+        <p>Based on the amazing <a href="https://github.com/SamHasler/sphere" target="_blank">sphere.js plugin</a> of <a href="">Sam Hasler</a>, jquery.earth3d.js is an open source jquery plugin which will allow you to emulate a 3d earth (or any planet actually) on canvas, and I added some functionalities I needed for my pet project.</p>
+        <p>Here are the main functionality provided so far:</p>
+        <ul>
+          <li>Change the map texture (you can change it to mars for example)</li>
+          <li>Change the rotation axis (tilt, turn)</li>
+          <li>Change the size</li>
+          <li>Change the default rotation speed</li>
+          <li>Smooth mouse drag: you can rotate the earth with your mouse, it will smoothly return to the normal speed</li>
+          <li>Render locations by indicating spherical coordinates</li>
+          <li>Draw paths between these locations</li>
+          <li>Draw and update flights following paths</li>
+          <li>Location and flights are clickable and entirely customizable</li>
+        </ul>
+        <h2>Licence</h2>
+        <p>jquery.earth3d.js is, as the <a href="https://github.com/SamHasler/sphere" target="_blank">sphere.js plugin</a>, under MIT licence</p>
+        <h2>Credits</h2>
+        <ul>
+          <li>
+            Of course, <a href="https://github.com/SamHasler/sphere" target="_blank">sphere.js plugin</a>
+          </li>
+          <li>
+            Roger Cook and Don Shanosky for the plain icon, on <a href="http://thenounproject.com/noun/airplane/#icon-No75" target="_blank">thenounproject</a>.
+          </li>
+        </ul>
+      </div>
+      <div id="showoff">
+        <div id="container">
+          <canvas id="sphere" width="400" height="400"></canvas>
+          <div id="glow-shadows" class="earth"></div>
+          <canvas id="flights" width="400" height="400"></canvas>
+          <div id="objects"></div>
+        </div>
+        <div class="choose_example">
+          Choose example: <select id="example">
+            <option value="simple">Simple earth</option>
+            <option value="simple_tilted">Simple tilted earth</option>
+            <option value="simple_mars">Simple mars</option>
+            <option value="locations">Earth with locations</option>
+            <option value="flights" selected>Earth with locations and flights</option>
+          </select>
+        </div>
+        <div class="code">
+          <a href="#" onclick="$('#example_code').show(); $(this).hide().siblings('a').show(); return false;">Show code</a>
+          <a href="#" style="display: none;" onclick="$('#example_code').hide(); $(this).hide().siblings('a').show(); return false;">Hide code</a>
+          <textarea id="example_code" onclick="this.focus();this.select();"></textarea>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
