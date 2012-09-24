@@ -7,7 +7,7 @@ http://sdrdis.github.com/jquery.earth-3d/
 Description
 -----------
 
-Based on the amazing sphere.js plugin of Sam Hasler, jquery.earth3d.js is an open source jquery plugin which will allow you to emulate a 3d earth (or any planet actually) on canvas. I also added some functionalities I needed for my pet project.
+Based on the amazing [sphere.js](https://github.com/SamHasler/sphere) plugin of [Sam Hasler](https://twitter.com/SamHasler), jquery.earth3d.js is an open source jquery plugin which will allow you to emulate a 3d earth (or any planet actually) on canvas. I also added some functionalities I needed for my pet project.
 
 Here are the main functionality provided so far:
 * Change the map texture (you can change it to mars for example)
@@ -22,9 +22,9 @@ Here are the main functionality provided so far:
 
 Licence
 -------
-jquery.earth3d.js is, as the sphere.js plugin, under MIT licence.
+jquery.earth3d.js is, as the [sphere.js](https://github.com/SamHasler/sphere) plugin, under  MIT licence.
 
 Credits
 -------
-* Of course, sphere.js plugin
+* Of course, [sphere.js](https://github.com/SamHasler/sphere) plugin
 * Roger Cook and Don Shanosky for the plain icon, on thenounproject.
