@@ -50,7 +50,7 @@ Here are some possible improvements:
 
 * Defining a starting position
 * Make it possible to rotate around the globe as if we are in orbit (Sam Hasler proposed it, and I totally agree)
-* For the moment, glows and shadows are designed on photoshop. I will soon post a tutorial on how to do it, but what could be awesome is to generate it on canvas
+* For the moment, glows and shadows are designed on photoshop. I will soon post a tutorial on how to do it, but what could be awesome is to generate it on canvas, and defining angle and intensity of lighting...
 * Zoom support
 * The code can always be cleaner, more optimized...
 
