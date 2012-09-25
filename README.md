@@ -35,10 +35,24 @@ I didn't do pure mathematics since a long time ago, and I didn't have a huge amo
 
 All problems locations can be found in the file jquery.earth-3d.js when you search for "WARNING". If you have an idea, don't hesitate to do a pull request :).
 
-The two main problems are:
+The main problems are:
 * getSphereRadiusInPixel is supposed to return the sphere radius in pixel ; it is used for locations and flights rendering to determine whether or not an item should be drawn. The thing is I didn't know how to get the exact value from the sphere.js plugin, so I made a linear regression; this solution therefore is not exact, and can lead to some display issues if you change the planet size (a workaround can be to modify the pixelRadiusMultiplier but it can only be a temporary solution).
 
 * I got the locations and paths to work only when the planet is not rotated. I had to create some horrible function, as _calibrated, to make this work. I tried different approaches, but failed each time (the problem might be coming from me :)).
+
+* Paths drawing are the main optimization issue (you can easily notify it on the demo). For the moment it is drawn on canvas, but I wonder if we could gain some CPU by instead using SVG or the DOM.
+
+Areas for improvement
+---------------------
+Of course, if anybody has a suggestion, don't hesitate to use github issues :).
+
+Here are some possible improvements:
+
+* Defining a starting position
+* Make it possible to rotate around the globe as if we are in orbit (Sam Hasler proposed it, but I totally agree)
+* For the moment, glows and shadows are designed on photoshop. I will soon post a tutorial on how to do it, but what could be awesome is to generate it on canvas
+* Zoom support
+* The code can always be cleaner, more optimized...
 
 Documentation
 -------------
