@@ -460,6 +460,7 @@
           var flatDistance = this._distance(originObject.flatPosition, destinationObject.flatPosition);
 
           var nb = flatDistance * 0.9 / 20;
+          // WARNING: we are drawing the paths on canvas, intensively using CPU. Could we gain by instead using SVG or the DOM ?
           for (var i = 0; i < nb; i++) {
 
 
