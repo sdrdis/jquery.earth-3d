@@ -31,7 +31,7 @@ Credits
 
 Known issues
 ------------
-I didn't do math for a long time, and I didn't have a huge amount of time to make this plugin, so there are some known and urgent issues to resolve for jquery.earth-3d.js to become stable.
+I didn't do pure mathematics since a long time ago, and I didn't have a huge amount of time to make this plugin, so there are some known and urgent issues to resolve for jquery.earth-3d.js to become stable.
 All problems locations can be found in the file jquery.earth-3d.js when you search for "WARNING". If you have an idea, don't hesitate to do a pull request :).
 The two main problems are:
 * getSphereRadiusInPixel is supposed to return the sphere radius in pixel ; it is used for locations and flights rendering to determine whether or not an item should be drawn. The thing is I didn't know how to get the exact value from the sphere.js plugin, so I made a linear regression; this solution therefore is not exact, and can lead to some display issues if you change the planet size (a workaround can be to modify the pixelRadiusMultiplier but it can only be a temporary solution).
