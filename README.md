@@ -35,8 +35,7 @@ Known issues
 Documentation
 -------------
 
-
-Options:
+### Options:
   * texture: texture map used by the planet
 
   * sphere: rotation and size of the planet
@@ -146,7 +145,7 @@ Options:
 
 
 
-Functions
+### Functions
 
   * getSphereRadiusInPixel: function which allows you to get the sphere radius in pixel
     /!| WARNING: this function needs to be refactored, since I didn't find out (my maths courses are far away) how to
