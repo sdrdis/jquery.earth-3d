@@ -26,8 +26,8 @@ examples['simple_mars'] = function() {
 
 examples['locations'] = function() {
   /* defining locations to display.
-     Each position must have a key, an alpha and delta position.
-     Any additional key can be reach via callbacks functions.
+     Each position must have a key, an alpha and delta position (or x and y if you want to display a static object).
+     Any additional key can be reached via callbacks functions.
   */
   var objects = {
     obj1: {
@@ -65,8 +65,8 @@ examples['locations'] = function() {
 
 examples['flights'] = function() {
   /* defining locations to display.
-     Each position must have a key, an alpha and delta position.
-     Any additional key can be reach via callbacks functions.
+     Each position must have a key, an alpha and delta position (or x and y if you want to display a static object).
+     Any additional key can be reached via callbacks functions.
   */
   var objects = {
     obj1: {
