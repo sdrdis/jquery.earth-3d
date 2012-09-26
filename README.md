@@ -70,7 +70,7 @@ Documentation
   * Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
     Any additional key can be reached via callbacks functions
     Example:
-`
+```
 {
   obj1: {
     alpha: Math.PI / 4,
@@ -78,7 +78,7 @@ Documentation
     name: 'location 1'
   }
 }
-`
+```
 
 * paths: paths and flights to display over the planet:
    Each path must have a key, an origin and a destination. The values are the location's key.
