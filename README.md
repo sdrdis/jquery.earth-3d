@@ -24,9 +24,14 @@ Licence
 -------
 jquery.earth3d.js is, as the [sphere.js](https://github.com/SamHasler/sphere) plugin, under [MIT licence](http://sdrdis.github.com/jquery.earth-3d/MIT-LICENSE.txt).
 
-Credits
+Authors
 -------
-* Of course, [sphere.js](https://github.com/SamHasler/sphere) plugin
+* Sebastien Drouyer - alias [@sdrdis](https://twitter.com/sdrdis) - for this jquery plugin
+* Sam Hasler - alias [@SamHasler](https://twitter.com/SamHasler) - for the [sphere.js plugin](https://github.com/SamHasler/sphere)
+
+Additional Credits
+------------------
+* Of course,
 * Roger Cook and Don Shanosky for the plain icon, on [thenounproject](http://thenounproject.com/noun/airplane/#icon-No75).
 
 Known issues
