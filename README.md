@@ -49,7 +49,7 @@ Of course, if anybody has a suggestion, don't hesitate to use github issues :).
 Here are some possible improvements:
 
 * Defining a starting position
-* Make it possible to rotate around the globe as if we are in orbit (Sam Hasler proposed it, and I totally agree)
+* Make it possible to rotate around the globe as if we are in orbit
 * For the moment, glows and shadows are designed on photoshop. I will soon post a tutorial on how to do it, but what could be awesome is to generate it on canvas, and defining light angle and intensity...
 * Zoom support
 * The code can always be cleaner, more optimized...
@@ -58,109 +58,109 @@ Documentation
 -------------
 
 ### Options:
-  * texture: texture map used by the planet
+* texture: texture map used by the planet
 
-  * sphere: rotation and size of the planet
+* sphere: rotation and size of the planet
 
-  * defaultSpeed: default spinning speed of the planet
+* defaultSpeed: default spinning speed of the planet
 
-  * backToDefaultTime: time (in ms) to return by to default speed when planet is dragged
+* backToDefaultTime: time (in ms) to return by to default speed when planet is dragged
 
-  * objects: locations to display on the planet:
-    * Each position must have a key, an alpha and delta position (or x and y if you want to display a static object).
-      Any additional key can be reached via callbacks functions
-      Example:
-        {
-          obj1: {
-            alpha: Math.PI / 4,
-            delta: 0,
-            name: 'location 1'
-          }
+* locations: locations to display on the planet:
+  * Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
+    Any additional key can be reached via callbacks functions
+    Example:
+      `{
+        obj1: {
+          alpha: Math.PI / 4,
+          delta: 0,
+          name: 'location 1'
         }
+      }`
 
-  * paths: paths and flights to display over the planet:
-     Each path must have a key, an origin and a destination. The values are the location's key.
-     You can, if you want to, define flights on these paths.
-     Each flight has a key, a destination (the location's key) and a position.
-     The position is the progress a fleet has made on its path.
-     Any additional key can be reach via callbacks functions.
-     Example:
-      {
-        path: {
-          origin: 'obj1',
-          destination: 'obj2',
-          flights: {
-            flight: {
-              position: 0.25,
-              destination: 'obj2',
-              name: 'Flight 1'
-            },
-            flight2: {
-              position: 0.25,
-              destination: 'obj1',
-              name: 'Flight 2'
-            }
+* paths: paths and flights to display over the planet:
+   Each path must have a key, an origin and a destination. The values are the location's key.
+   You can, if you want to, define flights on these paths.
+   Each flight has a key, a destination (the location's key) and a position.
+   The position is the progress a fleet has made on its path.
+   Any additional key can be reach via callbacks functions.
+   Example:
+    `{
+      path: {
+        origin: 'obj1',
+        destination: 'obj2',
+        flights: {
+          flight: {
+            position: 0.25,
+            destination: 'obj2',
+            name: 'Flight 1'
+          },
+          flight2: {
+            position: 0.25,
+            destination: 'obj1',
+            name: 'Flight 2'
           }
         }
       }
+    }`
 
-  * flightsCanvas: Dom element which is a canvas and where the flights and paths are drawn
+* flightsCanvas: Dom element which is a canvas and where the flights and paths are drawn
 
-  * dragElement: Dom element where we catch the mouse drag
+* dragElement: Dom element where we catch the mouse drag
 
-  * objectsElement: Dom elements where the locations are drawn
+* locationsElement: Dom elements where the locations are drawn
 
-  * flightsCanvasPosition: position of the flight canvas (can be use if you have some gap between your planet and your flights
+* flightsCanvasPosition: position of the flight canvas (can be use if you have some gap between your planet and your flights
 
-  * pixelRadiusMultiplier: (TEMPORARY) used by the getSphereRadiusInPixel (see the functions)
+* pixelRadiusMultiplier: (TEMPORARY) used by the getSphereRadiusInPixel (see the functions)
 
-  * onInitObject: callback function which allows you to define what to do when the locations are initialized
-    * Parameters:
-      * object: location (coming from objects option)
-      * widget: earth3d widget object
+* onInitLocation: callback function which allows you to define what to do when the locations are initialized
+  * Parameters:
+    * location: location (coming from locations option)
+    * widget: earth3d widget object
 
-  * onShowObject: callback function which allows you to define what to do when a location becomes visible (was behind the planet and is now in front of it)
-    * Parameters:
-      * object: location (coming from objects option)
-      * x: 2d left position
-      * y: 2d top position
-      * widget: earth3d widget object
+* onShowLocation: callback function which allows you to define what to do when a location becomes visible (was behind the planet and is now in front of it)
+  * Parameters:
+    * location: location (coming from locations option)
+    * x: 2d left position
+    * y: 2d top position
+    * widget: earth3d widget object
 
-  * onRefreshObject: callback function which allows you to define what to do when a location is refreshed (it moves)
-    * Parameters:
-      * object: location (coming from objects option)
-      * x: 2d left position
-      * y: 2d top position
-      * widget: earth3d widget object
+* onRefreshLocation: callback function which allows you to define what to do when a location is refreshed (it moves)
+  * Parameters:
+    * location: location (coming from locations option)
+    * x: 2d left position
+    * y: 2d top position
+    * widget: earth3d widget object
 
-  * onHideObject: callback function which allows you to define what to do when a location becomes invisible (was in front of the planet and is now behind it)
-    * Parameters:
-      * object: location (coming from objects option)
-      * x: 2d left position
-      * y: 2d top position
-      * widget: earth3d widget object
+* onHideLocation: callback function which allows you to define what to do when a location becomes invisible (was in front of the planet and is now behind it)
+  * Parameters:
+    * location: location (coming from locations option)
+    * x: 2d left position
+    * y: 2d top position
+    * widget: earth3d widget object
 
-  * onInitFlight: callback function which allows you to define what to do when the flights are initialized
-    * Parameters:
-      * object: flight (coming from flights option)
-      * widget: earth3d widget object
+* onInitFlight: callback function which allows you to define what to do when the flights are initialized
+  * Parameters:
+    * flight: flight (coming from flights option)
+    * widget: earth3d widget object
 
-  * onShowFlight: callback function which allows you to define what to do when a flight becomes visible (was behind the planet and is now in front of it)
-    * Parameters:
-      * object: flight (coming from flights option)
-      * widget: earth3d widget object
+* onShowFlight: callback function which allows you to define what to do when a flight becomes visible (was behind the planet and is now in front of it)
+  * Parameters:
+    * flight: flight (coming from flights option)
+    * widget: earth3d widget object
 
-  * onRefreshFlight: callback function which allows you to define what to do when a flight is refreshed (it moves)
-    * Parameters:
-      * flight: flight (coming from flights option)
-      * x: 2d left position
-      * y: 2d top position
-      * widget: earth3d widget object
+* onRefreshFlight: callback function which allows you to define what to do when a flight is refreshed (it moves)
+  * Parameters:
+    * flight: flight (coming from flights option)
+    * x: 2d left position
+    * y: 2d top position
+    * widget: earth3d widget object
 
-  * onHideFlight: callback function which allows you to define what to do when a flight becomes invisible (was in front of the planet and is now behind it)
-    * Parameters:
-      * flight: flight (coming from flights option)
-      * widget: earth3d widget object
+* onHideFlight: callback function which allows you to define what to do when a flight becomes invisible (was in front of the planet and is now behind it)
+  * Parameters:
+    * flight: flight (coming from flights option)
+    * widget: earth3d widget object
 
 
 
