@@ -70,7 +70,7 @@ Documentation
   * Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
     Any additional key can be reached via callbacks functions
     Example:
-```
+```javascript
 {
   obj1: {
     alpha: Math.PI / 4,
