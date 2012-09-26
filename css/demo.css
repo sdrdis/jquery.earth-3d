@@ -54,7 +54,7 @@ a {
     height: 400px;
 }
 
-#sphere, #flights, #glow-shadows, #objects, #drag {
+#sphere, #flights, #glow-shadows, #locations, #drag {
     position: absolute;
     top: 0px;
     left: 0px;
@@ -75,7 +75,7 @@ a {
     background: url(../images/mars-glow-shadows.png);
 }
 
-.object {
+.location {
     position: absolute;
     width: 10px;
     height: 10px;
@@ -88,7 +88,7 @@ a {
     cursor: pointer;
 }
 
-.object:hover {
+.location:hover {
     width: 15px;
     height: 15px;
     margin-left: -7.5px;

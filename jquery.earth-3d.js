@@ -29,8 +29,8 @@
 
     * backToDefaultTime: time (in ms) to return by to default speed when planet is dragged
 
-    * objects: locations to display on the planet:
-      * Each position must have a key, an alpha and delta position (or x and y if you want to display a static object).
+    * locations: locations to display on the planet:
+      * Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
         Any additional key can be reached via callbacks functions
         Example:
           {
@@ -71,46 +71,46 @@
 
     * dragElement: Dom element where we catch the mouse drag
 
-    * objectsElement: Dom elements where the locations are drawn
+    * locationsElement: Dom elements where the locations are drawn
 
     * flightsCanvasPosition: position of the flight canvas (can be use if you have some gap between your planet and your flights
 
     * pixelRadiusMultiplier: (TEMPORARY) used by the getSphereRadiusInPixel (see the functions)
 
-    * onInitObject: callback function which allows you to define what to do when the locations are initialized
+    * onInitLocation: callback function which allows you to define what to do when the locations are initialized
       * Parameters:
-        * object: location (coming from objects option)
+        * location: location (coming from locations option)
         * widget: earth3d widget object
 
-    * onShowObject: callback function which allows you to define what to do when a location becomes visible (was behind the planet and is now in front of it)
+    * onShowLocation: callback function which allows you to define what to do when a location becomes visible (was behind the planet and is now in front of it)
       * Parameters:
-        * object: location (coming from objects option)
+        * location: location (coming from locations option)
         * x: 2d left position
         * y: 2d top position
         * widget: earth3d widget object
 
-    * onRefreshObject: callback function which allows you to define what to do when a location is refreshed (it moves)
+    * onRefreshLocation: callback function which allows you to define what to do when a location is refreshed (it moves)
       * Parameters:
-        * object: location (coming from objects option)
+        * location: location (coming from locations option)
         * x: 2d left position
         * y: 2d top position
         * widget: earth3d widget object
 
-    * onHideObject: callback function which allows you to define what to do when a location becomes invisible (was in front of the planet and is now behind it)
+    * onHideLocation: callback function which allows you to define what to do when a location becomes invisible (was in front of the planet and is now behind it)
       * Parameters:
-        * object: location (coming from objects option)
+        * location: location (coming from locations option)
         * x: 2d left position
         * y: 2d top position
         * widget: earth3d widget object
 
     * onInitFlight: callback function which allows you to define what to do when the flights are initialized
       * Parameters:
-        * object: flight (coming from flights option)
+        * flight: flight (coming from flights option)
         * widget: earth3d widget object
 
     * onShowFlight: callback function which allows you to define what to do when a flight becomes visible (was behind the planet and is now in front of it)
       * Parameters:
-        * object: flight (coming from flights option)
+        * flight: flight (coming from flights option)
         * widget: earth3d widget object
 
     * onRefreshFlight: callback function which allows you to define what to do when a flight is refreshed (it moves)
@@ -156,42 +156,42 @@
       },
       defaultSpeed: 20,
       backToDefaultTime: 4000,
-      objects: {
+      locations: {
       },
       paths: {
       },
       flightsCanvas: null,
       dragElement: null,
-      objectsElement: null,
+      locationsElement: null,
       flightsCanvasPosition: {
         x: 0,
         y: 0
       },
       pixelRadiusMultiplier: 0.97,
-      onInitObject: function(object, widget) {
-        var $elem = $('<div class="object"></div>');
-        $elem.appendTo(widget.options.objectsElement);
+      onInitLocation: function(location, widget) {
+        var $elem = $('<div class="location"></div>');
+        $elem.appendTo(widget.options.locationsElement);
         $elem.click(function() {
-            alert('Clicked on ' + object.name);
+            alert('Clicked on ' + location.name);
         });
-        object.$element = $elem;
+        location.$element = $elem;
       },
-      onShowObject: function(object, x, y) {
-        object.$element.show();
+      onShowLocation: function(location, x, y) {
+        location.$element.show();
       },
-      onRefreshObject: function(object, x, y) {
+      onRefreshLocation: function(location, x, y) {
         //console.log(x, y);
-        object.$element.css({
+        location.$element.css({
           left: x,
           top: y
         });
       },
-      onHideObject: function(object, x, y) {
-        object.$element.hide();
+      onHideLocation: function(location, x, y) {
+        location.$element.hide();
       },
       onInitFlight: function(flight, widget) {
         var $elem = $('<div class="flight"></div>');
-        $elem.appendTo(widget.options.objectsElement);
+        $elem.appendTo(widget.options.locationsElement);
         $elem.click(function() {
           alert('Clicked on ' + flight.name);
         });
@@ -249,10 +249,10 @@
           }
         });
       }
-      for (var key in this.options.objects) {
-        var object = this.options.objects[key];
-        object.visible = true;
-        this.options.onInitObject(object, this);
+      for (var key in this.options.locations) {
+        var location = this.options.locations[key];
+        location.visible = true;
+        this.options.onInitLocation(location, this);
       }
       this._initFlights();
     },
@@ -330,12 +330,12 @@
         y: this.element.height() / 2
       }
 
-      for (var key in this.options.objects) {
-        var object = this.options.objects[key];
+      for (var key in this.options.locations) {
+        var location = this.options.locations[key];
 
-        if (typeof object.delta === 'undefined') {
-          object.flatPosition = {x: object.x, y: object.y};
-          this.options.onRefreshObject(object, object.x, object.y, this);
+        if (typeof location.delta === 'undefined') {
+          location.flatPosition = {x: location.x, y: location.y};
+          this.options.onRefreshLocation(location, location.x, location.y, this);
           continue;
         }
 
@@ -344,12 +344,12 @@
           I had to create the _calibrated functions to modify the deltaAngle to make the result look good on
           a spinning planet without rotation. It will totally bug with rotation!
         * */
-        var progression = (((this.posVar + this.textureWidth * object.delta / (2 * Math.PI)) % this.textureWidth) / this.textureWidth);
+        var progression = (((this.posVar + this.textureWidth * location.delta / (2 * Math.PI)) % this.textureWidth) / this.textureWidth);
         var alphaAngle = progression * 2 * Math.PI;
-        var deltaAngle = this._calibrated(progression, object.alpha) * 2 * Math.PI;
+        var deltaAngle = this._calibrated(progression, location.alpha) * 2 * Math.PI;
 
 
-        var objAlpha = ry + object.alpha - Math.sin(alphaAngle / 2) * 0.15 * (object.alpha - Math.PI / 2) / (Math.PI / 4);
+        var objAlpha = ry + location.alpha - Math.sin(alphaAngle / 2) * 0.15 * (location.alpha - Math.PI / 2) / (Math.PI / 4);
         var objDelta = rz + deltaAngle;
 
 
@@ -361,19 +361,19 @@
 
         var flatPosition = this._orthographicProjection(a);
 
-        if (a.x < 0 && !object.visible) {
-          this.options.onShowObject(object, flatPosition.x, flatPosition.y, this);
+        if (a.x < 0 && !location.visible) {
+          this.options.onShowLocation(location, flatPosition.x, flatPosition.y, this);
         }
-        if (a.x > 0 && object.visible) {
-          this.options.onHideObject(object, flatPosition.x, flatPosition.y, this);
+        if (a.x > 0 && location.visible) {
+          this.options.onHideLocation(location, flatPosition.x, flatPosition.y, this);
         }
-        this.options.onRefreshObject(object, flatPosition.x, flatPosition.y, this);
+        this.options.onRefreshLocation(location, flatPosition.x, flatPosition.y, this);
 
-        object.visible = a.x < 0;
-        object.position = a;
-        object.flatPosition = flatPosition;
-        object.rAlpha = objAlpha;
-        object.rDelta = objDelta;
+        location.visible = a.x < 0;
+        location.position = a;
+        location.flatPosition = flatPosition;
+        location.rAlpha = objAlpha;
+        location.rDelta = objDelta;
 
 
 
@@ -446,18 +446,18 @@
     _drawPath: function(path, center, r) {
 
 
-      var originObject = this.options.objects[path.origin];
-      var destinationObject = this.options.objects[path.destination];
+      var originLocation = this.options.locations[path.origin];
+      var destinationLocation = this.options.locations[path.destination];
 
       var dotSize = 50;
       var spacing = 0.15;
 
-      if (typeof originObject.delta === 'undefined' || typeof destinationObject.delta === 'undefined') {
-        var pathVisible = originObject.visible && destinationObject.visible;
+      if (typeof originLocation.delta === 'undefined' || typeof destinationLocation.delta === 'undefined') {
+        var pathVisible = originLocation.visible && destinationLocation.visible;
         if (pathVisible) {
 
 
-          var flatDistance = this._distance(originObject.flatPosition, destinationObject.flatPosition);
+          var flatDistance = this._distance(originLocation.flatPosition, destinationLocation.flatPosition);
 
           var nb = flatDistance * 0.9 / 20;
           // WARNING: we are drawing the paths on canvas, intensively using CPU. Could we gain by instead using SVG or the DOM ?
@@ -465,13 +465,13 @@
 
 
             var fromFlatPosition = {
-              x: ((nb - i) / nb) * originObject.flatPosition.x + (i / nb) * destinationObject.flatPosition.x,
-              y: ((nb - i) / nb) * originObject.flatPosition.y + (i / nb) * destinationObject.flatPosition.y
+              x: ((nb - i) / nb) * originLocation.flatPosition.x + (i / nb) * destinationLocation.flatPosition.x,
+              y: ((nb - i) / nb) * originLocation.flatPosition.y + (i / nb) * destinationLocation.flatPosition.y
             };
 
             var toFlatPosition = {
-              x: Math.max(((nb - (i + 1)) / nb), 0) * originObject.flatPosition.x + Math.min(((i + 1) / nb), 1) * destinationObject.flatPosition.x,
-              y: Math.max(((nb - (i + 1)) / nb), 0) * originObject.flatPosition.y + Math.min(((i + 1) / nb), 1) * destinationObject.flatPosition.y
+              x: Math.max(((nb - (i + 1)) / nb), 0) * originLocation.flatPosition.x + Math.min(((i + 1) / nb), 1) * destinationLocation.flatPosition.x,
+              y: Math.max(((nb - (i + 1)) / nb), 0) * originLocation.flatPosition.y + Math.min(((i + 1) / nb), 1) * destinationLocation.flatPosition.y
             };
 
             var diff = {
@@ -508,8 +508,8 @@
 
 
           var flightFlatPosition = {
-            x: (1 - position) * originObject.flatPosition.x + position * destinationObject.flatPosition.x,
-            y: (1 - position) * originObject.flatPosition.y + position * destinationObject.flatPosition.y
+            x: (1 - position) * originLocation.flatPosition.x + position * destinationLocation.flatPosition.x,
+            y: (1 - position) * originLocation.flatPosition.y + position * destinationLocation.flatPosition.y
           };
 
           if (!flight.visible && pathVisible) {
@@ -522,7 +522,7 @@
             flight.visible = false;
           }
 
-          var angle = Math.atan2(destinationObject.flatPosition.y - originObject.flatPosition.y, destinationObject.flatPosition.x - originObject.flatPosition.x) + (flight.destination == path.destination ? 0 : Math.PI);
+          var angle = Math.atan2(destinationLocation.flatPosition.y - originLocation.flatPosition.y, destinationLocation.flatPosition.x - originLocation.flatPosition.x) + (flight.destination == path.destination ? 0 : Math.PI);
           //console.log(flightAheadFlatPosition.y - flightFlatPosition.y);
 
           this.options.onRefreshFlight(flight, flightFlatPosition.x, flightFlatPosition.y, angle, this);
@@ -532,7 +532,7 @@
         return;
       }
 
-      var objectsDistance = this._distance(originObject.position, destinationObject.position);
+      var locationsDistance = this._distance(originLocation.position, destinationLocation.position);
 
 
       var middlePosition = {
@@ -542,16 +542,16 @@
       };
 
 
-      var radius = this._distance(originObject.position, middlePosition);
+      var radius = this._distance(originLocation.position, middlePosition);
 
       var originP = {
-        delta: Math.atan2((originObject.position.y - middlePosition.y), (originObject.position.x - middlePosition.x)),
-        alpha: Math.acos((originObject.position.z - middlePosition.z) / radius)
+        delta: Math.atan2((originLocation.position.y - middlePosition.y), (originLocation.position.x - middlePosition.x)),
+        alpha: Math.acos((originLocation.position.z - middlePosition.z) / radius)
       };
 
       var destinationP = {
-        delta: Math.atan2((destinationObject.position.y - middlePosition.y), (destinationObject.position.x - middlePosition.x)),
-        alpha: Math.acos((destinationObject.position.z - middlePosition.z) / radius)
+        delta: Math.atan2((destinationLocation.position.y - middlePosition.y), (destinationLocation.position.x - middlePosition.x)),
+        alpha: Math.acos((destinationLocation.position.z - middlePosition.z) / radius)
       };
 
 
@@ -576,7 +576,7 @@
 
 
       if (!path.nb) {
-        path.nb = Math.round(((objectsDistance / (2 * -r)) * Math.PI * 2 * -r + (1 - (objectsDistance / (2 * -r))) * objectsDistance) / dotSize);
+        path.nb = Math.round(((locationsDistance / (2 * -r)) * Math.PI * 2 * -r + (1 - (locationsDistance / (2 * -r))) * locationsDistance) / dotSize);
       }
       var nb = path.nb;
       var maxDistance = 1.2;

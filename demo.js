@@ -2,13 +2,13 @@ var examples = {};
 
 examples['simple'] = function() {
   $('#sphere').earth3d({
-    dragElement: $('#objects') // where do we catch the mouse drag
+    dragElement: $('#locations') // where do we catch the mouse drag
   });
 };
 
 examples['simple_tilted'] = function() {
   $('#sphere').earth3d({
-    dragElement: $('#objects'), // where do we catch the mouse drag
+    dragElement: $('#locations'), // where do we catch the mouse drag
     sphere: { // rotation and size of the planet
       tilt: 40,
       turn: 20,
@@ -20,16 +20,16 @@ examples['simple_tilted'] = function() {
 examples['simple_mars'] = function() {
   $('#sphere').earth3d({
     texture: 'images/mars1024x1024.jpg', // texture used by planet
-    dragElement: $('#objects') // where do we catch the mouse drag
+    dragElement: $('#locations') // where do we catch the mouse drag
   });
 };
 
 examples['locations'] = function() {
   /* defining locations to display.
-     Each position must have a key, an alpha and delta position (or x and y if you want to display a static object).
+     Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
      Any additional key can be reached via callbacks functions.
   */
-  var objects = {
+  var locations = {
     obj1: {
       alpha: Math.PI / 4,
       delta: 0,
@@ -57,18 +57,18 @@ examples['locations'] = function() {
     }
   };
   $('#sphere').earth3d({
-    objectsElement: $('#objects'),
-    dragElement: $('#objects'), // where do we catch the mouse drag
-    objects: objects
+    locationsElement: $('#locations'),
+    dragElement: $('#locations'), // where do we catch the mouse drag
+    locations: locations
   });
 };
 
 examples['flights'] = function() {
   /* defining locations to display.
-     Each position must have a key, an alpha and delta position (or x and y if you want to display a static object).
+     Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
      Any additional key can be reached via callbacks functions.
   */
-  var objects = {
+  var locations = {
     obj1: {
       alpha: Math.PI / 4,
       delta: 0,
@@ -160,17 +160,17 @@ examples['flights'] = function() {
 
   $('#sphere').earth3d({
     flightsCanvas: $('#flights'),
-    objectsElement: $('#objects'),
-    dragElement: $('#objects'), // where do we catch the mouse drag
+    locationsElement: $('#locations'),
+    dragElement: $('#locations'), // where do we catch the mouse drag
     paths: paths,
-    objects: objects
+    locations: locations
   });
 };
 
 function selectExample(example) {
   $('#sphere').earth3d('destroy');
   $('#sphere').replaceWith($('<canvas id="sphere" width="400" height="400"></canvas>'));
-  $('.object').remove();
+  $('.location').remove();
   $('.flight').remove();
   $('#flights')[0].getContext('2d').clearRect(0, 0, 400, 400);
   if (example == 'simple_mars') {
