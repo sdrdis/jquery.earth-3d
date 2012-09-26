@@ -134,3 +134,15 @@ a {
 .code {
     margin-top: 10px;
 }
+
+.social {
+    display: inline-block;
+}
+
+.social.twitter {
+    vertical-align: -3px;
+}
+
+.social.google {
+    vertical-align: -7px;
+}

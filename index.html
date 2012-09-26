@@ -1,6 +1,9 @@
-<html>
+<html itemscope itemtype="http://schema.org/Product">
   <head>
     <title>jquery.earth-3d.js plugin - draw a 3d spinning earth on canvas</title>
+    <meta itemprop="name" content="jquery.earth-3d.js">
+    <meta itemprop="description" content="Based on the amazing sphere.js plugin of Sam Hasler, jquery.earth3d.js is an open source jquery plugin which will allow you to emulate a 3d earth (or any planet actually) on canvas.">
+    <meta itemprop="image" content="images/preview.png">
     <link rel="stylesheet" href="css/demo.css">
     <script type="text/javascript" src="plugins/sphere/requestanimationframe.polyfill.js"></script>
     <script type="text/javascript" src="plugins/jquery/jquery-1.7.2.min.js"></script>
@@ -15,6 +18,26 @@
     <a href="https://github.com/sdrdis/jquery.earth-3d"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
     <div id="demo">
       <div id="description">
+        <div class="socials">
+          Share:
+          <div class="social twitter">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://sdrdis.github.com/jquery.earth-3d/" data-text="jquery.earth-3d.js, draw a beautiful 3d spinning earth on canvas" data-count="none">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+          <div class="social google">
+            <!-- Place this tag where you want the +1 button to render. -->
+            <div class="g-plusone" data-size="tall" data-annotation="none" data-href="http://sdrdis.github.com/jquery.earth-3d/"></div>
+
+            <!-- Place this tag after the last +1 button tag. -->
+            <script type="text/javascript">
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+          </div>
+        </div>
         <h2>Description</h2>
         <p>Based on the amazing <a href="https://github.com/SamHasler/sphere" target="_blank">sphere.js plugin</a> of <a href="https://twitter.com/SamHasler">Sam Hasler</a>, jquery.earth3d.js is an open source jquery plugin which will allow you to emulate a 3d earth (or any planet actually) on canvas. I also added some functionalities I needed for my pet project.</p>
         <p>Here are the main functionality provided so far:</p>
