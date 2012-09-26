@@ -70,15 +70,15 @@ Documentation
   * Each position must have a key, an alpha and delta position (or x and y if you want to display a static location).
     Any additional key can be reached via callbacks functions
     Example:
-      `
-      {
-        obj1: {
-          alpha: Math.PI / 4,
-          delta: 0,
-          name: 'location 1'
-        }
-      }
-      `
+`
+{
+  obj1: {
+    alpha: Math.PI / 4,
+    delta: 0,
+    name: 'location 1'
+  }
+}
+`
 
 * paths: paths and flights to display over the planet:
    Each path must have a key, an origin and a destination. The values are the location's key.
@@ -87,26 +87,26 @@ Documentation
    The position is the progress a fleet has made on its path.
    Any additional key can be reach via callbacks functions.
    Example:
-    `
-    {
-      path: {
-        origin: 'obj1',
+`
+{
+  path: {
+    origin: 'obj1',
+    destination: 'obj2',
+    flights: {
+      flight: {
+        position: 0.25,
         destination: 'obj2',
-        flights: {
-          flight: {
-            position: 0.25,
-            destination: 'obj2',
-            name: 'Flight 1'
-          },
-          flight2: {
-            position: 0.25,
-            destination: 'obj1',
-            name: 'Flight 2'
-          }
-        }
+        name: 'Flight 1'
+      },
+      flight2: {
+        position: 0.25,
+        destination: 'obj1',
+        name: 'Flight 2'
       }
     }
-    `
+  }
+}
+`
 
 * flightsCanvas: Dom element which is a canvas and where the flights and paths are drawn
 
