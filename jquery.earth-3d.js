@@ -190,6 +190,9 @@
       onHideLocation: function(location, x, y) {
         location.$element.hide();
       },
+      onDeleteLocation: function(location) {
+        location.$element.remove();
+      },
       onInitFlight: function(flight, widget) {
         var $elem = $('<div class="flight"></div>');
         $elem.appendTo(widget.options.locationsElement);
@@ -212,6 +215,9 @@
       },
       onHideFlight: function(flight) {
         flight.$element.hide();
+      },
+      onDeleteFlight: function(flight) {
+        flight.$element.remove();
       }
     },
     earth: null,
@@ -250,12 +256,16 @@
           }
         });
       }
+      this._initLocations();
+      this._initFlights();
+    },
+
+    _initLocations: function() {
       for (var key in this.options.locations) {
         var location = this.options.locations[key];
         location.visible = true;
         this.options.onInitLocation(location, this);
       }
-      this._initFlights();
     },
 
     _initFlights: function() {
@@ -829,12 +839,20 @@
       };
     },
 
+    changeLocations: function(locations) {
+      for (var key in this.options.locations) {
+        this.options.onDeleteLocation(this.options.locations[key], this);
+      }
+      this.options.locations = locations;
+      this._initLocations();
+    },
+
     changePaths: function(paths) {
       for (var key in this.options.paths) {
         var path = this.options.paths[key];
         for (var keyFlight in path.flights) {
           var flight = path.flights[keyFlight];
-          this.options.onHideFlight(flight, this);
+          this.options.onDeleteFlight(flight, this);
         }
       }
       this.options.paths = paths;
