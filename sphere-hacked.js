@@ -10,6 +10,12 @@
     , turn: 20
   };
 
+  // Tiling informations
+  var tiling = {
+    horizontal: 1,
+    vertical: 1
+  };
+
   // frame count, current angle of rotation. inc/dec to turn.
   var gCtx;
   var gImage, gCtxImg;
@@ -108,7 +114,7 @@
   var rotCache = {};
 
 
-  var calculateVector = function(h,v){
+  var calculateVector = function(h,v) {
 
     // Calculate vector from focus point (Origin, so can ignor) to pixel
     V[X]=(hs_ch*h)-hhs;
@@ -413,18 +419,19 @@
         // add to 24*60*60 so it will be a day before turnBy is negative and it hits the slow negative modulo bug
         var turnBy = this.turnBy(time);
         var pixel = size*size;
+        var h2 = (textureHeight * textureHeight);
 
         while(pixel--){
           var vector = getVector(pixel);
           if (vector !== null){
             //rotate texture on sphere
-            var lh = Math.floor(vector.lh + turnBy) % textureWidth;
+            var lh = Math.floor(vector.lh * tiling.horizontal + turnBy * tiling.horizontal) % textureWidth;
             /*           lh = (lh < 0)
              ? ((textureWidth-1) - ((lh-1)%textureWidth))
              : (lh % textureWidth) ;
              */
             var idxC = pixel * 4;
-            var idxT = (lh + vector.lv) * 4;
+            var idxT = ((lh + (vector.lv * tiling.vertical) % h2) * 4);
 
             /* TODO light for alpha channel or alter s or l in hsl color value?
              - fn to calc distance between two points on sphere?
@@ -469,10 +476,11 @@
     vs_cv = (vs / size);
   }
 
-  this.createSphere = function (gCanvas, textureUrl, callback) {
+  this.createSphere = function (gCanvas, textureUrl, callback, tilingInfos) {
     size = Math.min(gCanvas.width, gCanvas.height);
     gCtx = gCanvas.getContext("2d");
     canvasImageData = gCtx.createImageData(size, size);
+    tiling = tilingInfos;
 
     hs_ch = (hs / size);
     vs_cv = (vs / size);

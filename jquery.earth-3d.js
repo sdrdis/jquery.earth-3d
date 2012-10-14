@@ -167,6 +167,7 @@
         x: 0,
         y: 0
       },
+      tiling: {horizontal: 1, vertical: 1},
       pixelRadiusMultiplier: 0.97,
       onInitLocation: function(location, widget) {
         var $elem = $('<div class="location"></div>');
@@ -232,7 +233,7 @@
       if (this.options.flightsCanvas !== null) {
         this.flightsCtx = this.options.flightsCanvas[0].getContext('2d');
       }
-      createSphere(this.element[0], this.options.texture, function(earth, textureWidth, textureHeight) { self._onSphereCreated(earth, textureWidth, textureHeight); });
+      createSphere(this.element[0], this.options.texture, function(earth, textureWidth, textureHeight) { self._onSphereCreated(earth, textureWidth, textureHeight); }, this.options.tiling);
       if (this.options.dragElement !== null) {
       this.options.dragElement
         .mousedown(function(e) {
@@ -352,11 +353,6 @@
         var objAlpha = ry + location.alpha - Math.sin(alphaAngle / 2) * 0.15 * (location.alpha - Math.PI / 2) / (Math.PI / 4);
         var objDelta = rz + deltaAngle;
 
-
-        //console.log(angle);
-
-        //console.log(objAlpha, objDelta);
-
         var a = this._orbitalTo3d(objAlpha, objDelta, r);
 
         var flatPosition = this._orthographicProjection(a);
@@ -375,14 +371,6 @@
         location.rAlpha = objAlpha;
         location.rDelta = objDelta;
 
-
-
-
-        //console.log(x, y, z);
-
-
-
-        // console.log(objAlpha, objDelta);
       }
 
       if (this.flightsCtx !== null) {
