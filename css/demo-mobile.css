@@ -1,0 +1,147 @@
+body {
+    background: black;
+    margin: 0;
+    padding: 0;
+    color: #DDD;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+h1 {
+    margin-top: 10px;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #777;
+}
+
+a {
+    color: white;
+}
+
+#demo {
+    overflow: hidden;
+}
+
+#description {
+    text-align: left;
+    float: left;
+    width: 49%;
+    max-width: 500px;
+    padding-top: 50px;
+    padding-left: 20px;
+}
+
+#showoff {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#container {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+}
+
+#sphere, #flights, #glow-shadows, #locations, #drag {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#glow-shadows {
+    top: 1px;
+    left: 1px;
+}
+
+#glow-shadows.earth {
+    background: url(../images/earth-glow-shadows.png);
+    background-size: 100% 100%;
+}
+
+#glow-shadows.mars {
+    background: url(../images/mars-glow-shadows.png);
+}
+
+.location {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 10px;
+    top: 10px;
+    border: 2px solid white;
+    margin-left: -5px;
+    margin-top: -5px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.location:hover {
+    width: 15px;
+    height: 15px;
+    margin-left: -7.5px;
+    margin-top: -7.5px;
+}
+
+.flight {
+    position: absolute;
+    width: 24px;
+    height: 25px;
+    left: 10px;
+    top: 10px;
+    background: url(../images/plain.png);
+    background-size: 100% 100%;
+    margin-left: -12px;
+    margin-top: -12.5px;
+    cursor: pointer;
+}
+
+.flight:hover {
+    width: 36px;
+    height: 37.5px;
+    margin-left: -18px;
+    margin-top: -18.75px;
+}
+
+
+.choose_example {
+    width: 35%;
+    margin-left: 32.5%;
+}
+
+#example_code {
+    width: 100%;
+    height: 200px;
+    background-color: black;
+    color: white;
+    border: 0px;
+    resize: none;
+    display: none;
+}
+
+.code {
+    margin-top: 10px;
+}
+
+.social {
+    display: inline-block;
+}
+
+.social.twitter {
+    vertical-align: -3px;
+}
+
+.social.google {
+    vertical-align: -7px;
+}

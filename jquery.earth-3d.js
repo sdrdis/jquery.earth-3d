@@ -242,15 +242,15 @@
       createSphere(this.element[0], this.options.texture, function(earth, textureWidth, textureHeight) { self._onSphereCreated(earth, textureWidth, textureHeight); }, this.options.tiling);
       if (this.options.dragElement !== null) {
       this.options.dragElement
-        .mousedown(function(e) {
-        self._mouseDragStart(e);
-        self.mousePressed = true;
-      })
-        .mouseup(function(e) {
+        .bind('mousedown vmousedown', function(e) {
+          self._mouseDragStart(e);
+          self.mousePressed = true;
+        })
+        .bind('mouseup vmouseup', function(e) {
           self._mouseDragStop(e);
           self.mousePressed = false;
         })
-        .mousemove(function(e){
+        .bind('mousemove vmousemove', function(e){
           if (self.mousePressed) {
             self._mouseDrag(e);
           }
