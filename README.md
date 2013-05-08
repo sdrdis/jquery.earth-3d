@@ -10,7 +10,7 @@ Description
 Based on the amazing [sphere.js](https://github.com/SamHasler/sphere) plugin of [Sam Hasler](https://twitter.com/SamHasler), jquery.earth3d.js is an open source jquery ui plugin which will allow you to emulate a 3d earth (or any planet actually) on canvas. I also added some functionalities I needed for my pet project.
 
 Here are the main functionality provided so far:
-* Change the map texture (you can change it to mars for example)
+* Change the map texture (you can change it to mars for example), along with the tiling
 * Change the rotation axis (tilt, turn)
 * Change the size
 * Change the default rotation speed
@@ -19,6 +19,7 @@ Here are the main functionality provided so far:
 * Draw paths between these locations
 * Draw and update flights following paths
 * Location and flights are clickable and entirely customizable
+* It works on [mobile](http://sebastien.drouyer.com/jquery.earth-3d/mobile.html)
 
 Licence
 -------
