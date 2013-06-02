@@ -285,6 +285,11 @@
     return {
       posDelta: posDelta,
       firstFramePos: (new Date()) * posDelta,
+      positionsCache: [],
+      minX: null,
+      minY: null,
+      maxX: null,
+      maxY: null,
 
       init: function(options) {
         this.changeRotation(options);
@@ -370,6 +375,8 @@
         })();
 
       },
+        
+     
 
       renderFrame: function(time){
         this.RF(time);
@@ -406,7 +413,55 @@
         RX = 0,RY,RZ;
       },
 
+      getRadius: function() {
+        if (this.minX === null) {
+          return null;
+        } else {
+          return ((this.maxX - this.minX) + (this.maxY - this.minY)) / 2;
+        }
+      },
 
+      getTexturePointPosition: function(x, y) {
+        var maxDistance = 30;
+        for (var i = 0; i < maxDistance; i++) {
+          var xx
+          var yy;
+          var pos;
+          for (xx = x - i; xx < x + i + 1; xx++) {
+            yy = y - i;
+            pos = this.getTexturePointPositionExact(xx, yy);
+            if (typeof pos !== 'undefined') {
+              return pos;
+            }
+            yy = y + i;
+            pos = this.getTexturePointPositionExact(xx, yy);
+            if (typeof pos !== 'undefined') {
+              return pos;
+            }
+          }
+          for (yy = y - i + 1; yy < y + i; yy++) {
+            xx = x - i;
+            pos = this.getTexturePointPositionExact(xx, yy);
+            if (typeof pos !== 'undefined') {
+              return pos;
+            }
+            xx = x + i;
+            pos = this.getTexturePointPositionExact(xx, yy);
+            if (typeof pos !== 'undefined') {
+              return pos;
+            }
+          }
+        }
+      },
+
+      getTexturePointPositionExact: function(x, y) {
+        var pixel = this.positionsCache[x + y * textureWidth];
+        if (typeof pixel === 'undefined') {
+          return pixel;
+        } else {
+          return {x: pixel % size, y: Math.floor(pixel / size), pixel: pixel, originalX: x, originalY: y};
+        }
+      },
 
       RF: function(time){
         // RX, RY & RZ may change part way through if the newR? (change tilt/turn) meathods are called while
@@ -421,9 +476,37 @@
         var pixel = size*size;
         var h2 = (textureHeight * textureHeight);
 
+        this.positionsCache = new Array(h2);
+
+        this.minX = null;
+        this.minY = null;
+        this.maxX = null;
+        this.maxY = null;
+
         while(pixel--){
           var vector = getVector(pixel);
           if (vector !== null){
+            var x = pixel % size;
+            var y = Math.floor(pixel / size);
+            if (this.minX == null) {
+              this.minX = x;
+              this.maxX = x;
+              this.minY = y;
+              this.maxY = y;
+            } else {
+              if (this.minX > x) {
+                this.minX = x;
+              }
+              if (this.maxX < x) {
+                this.maxX = x;
+              }
+              if (this.minY > y) {
+                this.minY = y;
+              }
+              if (this.maxY < y) {
+                this.maxY = y;
+              }
+            }
             //rotate texture on sphere
             var lh = Math.floor(vector.lh * tiling.horizontal + turnBy * tiling.horizontal) % textureWidth;
             /*           lh = (lh < 0)
@@ -432,6 +515,7 @@
              */
             var idxC = pixel * 4;
             var idxT = ((lh + (vector.lv * tiling.vertical) % h2) * 4);
+            this.positionsCache[Math.floor(idxT / 4)] = Math.floor(idxC / 4);
 
             /* TODO light for alpha channel or alter s or l in hsl color value?
              - fn to calc distance between two points on sphere?

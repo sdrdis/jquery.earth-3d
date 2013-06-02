@@ -144,7 +144,7 @@
       it will add the callback functions support
 
  */
-
+var earth3d;
 (function($) {
   $.widget('ui.earth3d', {
     options: {
@@ -234,6 +234,7 @@
     mousePressed: null,
 
     _create: function() {
+      earth3d = this;
       var self = this;
       this.obj = $('div');
       if (this.options.flightsCanvas !== null) {
@@ -279,24 +280,7 @@
     },
 
     getSphereRadiusInPixel: function() {
-      /*
-       4:81
-       8:167
-       12:261
-       6:123
-       10:213
-       2:41
-       3:61
-       9:189
-       7:143
-       5:101
-       */
-      //y = -0.281536 x^2  +  -18.0437x + -4.04651
-      //pair : y = -0.25 x^2  +  -18.5x + -3
-      //impair
-      var r = this.options.sphere.r * this.element.width() * this.options.pixelRadiusMultiplier / 300;
-      var pR = -0.281536 * r * r - 18.0437 * r - 4.04651;
-      return pR / 2;
+      return this.earth.getRadius() / 2;
     },
 
     _onSphereCreated: function(earth, textureWidth, textureHeight) {
@@ -574,7 +558,7 @@
 
 
       if (!path.nb) {
-        path.nb = Math.round(((locationsDistance / (2 * -r)) * Math.PI * 2 * -r + (1 - (locationsDistance / (2 * -r))) * locationsDistance) / dotSize);
+        path.nb = Math.round(((locationsDistance / (2 * r)) * Math.PI * 2 * r + (1 - (locationsDistance / (2 * r))) * locationsDistance) / dotSize);
       }
       var nb = path.nb;
       var maxDistance = 1.2;
@@ -590,8 +574,8 @@
         };
         //console.log(i, fromP.alpha, fromP.delta, toP.alpha, toP.delta);
 
-        var fromPosition = this._orbitalTo3d(fromP.alpha, fromP.delta, (Math.sin(Math.PI * i / nb) * (maxDistance - 1) + 1) * radius);
-        var toPosition = this._orbitalTo3d(toP.alpha, toP.delta, (Math.sin(Math.PI * (i + 1) / nb) * (maxDistance - 1) + 1) * radius);
+        var fromPosition = this._orbitalTo3d(fromP.alpha, fromP.delta, -(Math.sin(Math.PI * i / nb) * (maxDistance - 1) + 1) * radius);
+        var toPosition = this._orbitalTo3d(toP.alpha, toP.delta, -(Math.sin(Math.PI * (i + 1) / nb) * (maxDistance - 1) + 1) * radius);
         var diff = {
           x: fromPosition.x - toPosition.x,
           y: fromPosition.y - toPosition.y,
@@ -626,13 +610,13 @@
         var fromVisible = true;
         var toVisible = true;
         if (fromPosition.x > 0) {
-          if (fromDistanceCenter <= -r) {
+          if (fromDistanceCenter <= r) {
             fromVisible = false;
           }
         }
 
         if (toPosition.x > 0) {
-          if (toDistanceCenter <= -r) {
+          if (toDistanceCenter <= r) {
             toVisible = false;
           }
         }
@@ -644,7 +628,7 @@
         }
 
         if (!fromVisible) {
-          var intersection = this._line_circle_intersection(fromFlatPosition, toFlatPosition, center, -r);
+          var intersection = this._line_circle_intersection(fromFlatPosition, toFlatPosition, center, r);
           if (intersection.length == 0) {
             continue;
           }
@@ -652,7 +636,7 @@
         }
 
         if (!toVisible) {
-          var intersection = this._line_circle_intersection(fromFlatPosition, toFlatPosition, center, -r);
+          var intersection = this._line_circle_intersection(fromFlatPosition, toFlatPosition, center, r);
           if (intersection.length == 0) {
             continue;
           }
@@ -686,8 +670,8 @@
           delta: (1 - positionAhead) * originP.delta + positionAhead * destinationP.delta
         };
 
-        var flightPosition = this._orbitalTo3d(flightP.alpha, flightP.delta, (Math.sin(Math.PI * position) * (maxDistance - 1) + 1) * radius);
-        var flightAheadPosition = this._orbitalTo3d(flightAheadP.alpha, flightAheadP.delta, (Math.sin(Math.PI * positionAhead) * (maxDistance - 1) + 1) * radius);
+        var flightPosition = this._orbitalTo3d(flightP.alpha, flightP.delta, -(Math.sin(Math.PI * position) * (maxDistance - 1) + 1) * radius);
+        var flightAheadPosition = this._orbitalTo3d(flightAheadP.alpha, flightAheadP.delta, -(Math.sin(Math.PI * positionAhead) * (maxDistance - 1) + 1) * radius);
 
         flightPosition.x += middlePosition.x;
         flightPosition.y += middlePosition.y;
@@ -701,12 +685,12 @@
 
         var flightDistanceCenter = this._distance(flightFlatPosition, center);
 
-        if (!flight.visible && (flightPosition.x < 0 || flightDistanceCenter > -r)) {
+        if (!flight.visible && (flightPosition.x < 0 || flightDistanceCenter > r)) {
           this.options.onShowFlight(flight, this);
           flight.visible = true;
         }
 
-        if (flight.visible && (flightPosition.x > 0 && flightDistanceCenter < -r)) {
+        if (flight.visible && (flightPosition.x > 0 && flightDistanceCenter < r)) {
           this.options.onHideFlight(flight, this);
           flight.visible = false;
         }
@@ -752,9 +736,9 @@
      */
     _orbitalTo3d: function(alpha, delta, r) {
       return {
-        x: r * Math.sin(alpha) * Math.cos(delta),
-        y: r * Math.sin(alpha) * Math.sin(delta),
-        z: r * Math.cos(alpha)
+        x: -r * Math.sin(alpha) * Math.cos(delta),
+        y: -r * Math.sin(alpha) * Math.sin(delta),
+        z: -r * Math.cos(alpha)
       };
     },
 
