@@ -32,7 +32,6 @@ Authors
 
 Additional Credits
 ------------------
-* Of course,
 * Roger Cook and Don Shanosky for the plain icon, on [thenounproject](http://thenounproject.com/noun/airplane/#icon-No75).
 
 Known issues
