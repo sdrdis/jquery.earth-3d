@@ -830,6 +830,10 @@ var earth3d;
       this.options.locations = locations;
       this._initLocations();
     },
+    
+    rotateBy: function(amount) {
+      this.posVar += amount;
+    },    
 
     changePaths: function(paths) {
       for (var key in this.options.paths) {
